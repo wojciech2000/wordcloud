@@ -22,9 +22,7 @@ const PlayerForm = () => {
   });
 
   const onSubmit = (data: IPlayerForm) => {
-    console.log(data);
     setNick(data.nick);
-
     navigate(routes.cloudGame);
   };
 

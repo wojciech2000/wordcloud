@@ -1,4 +1,4 @@
-import CloudeGame from "components/cloudGame/CloudeGame.route";
+import CloudGame from "components/cloudGame/CloudGame.route";
 import { GameContextProvider } from "components/context/GameContext.context";
 import StartGame from "components/startGame/StartGame.route";
 import Summary from "components/summary/Summary.route";
@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route element={<StartGame />} path={routes.startGame} />
-          <Route element={<CloudeGame />} path={routes.cloudGame} />
+          <Route element={<CloudGame />} path={routes.cloudGame} />
           <Route element={<Summary />} path={routes.summary} />
         </Routes>
       </Router>
