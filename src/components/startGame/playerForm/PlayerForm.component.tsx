@@ -1,11 +1,18 @@
 import Input from "components/common/input/Input.component";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { useNavigate } from "react-router";
 
 import { IPlayerForm, playerFormSchema } from "./PlayerForm.model";
 import Button from "components/common/button/Button.component";
+import { GameContext } from "components/context/GameContext.context";
+import { routes } from "utilities/config/routes";
 
 const PlayerForm = () => {
+  const navigate = useNavigate();
+  let { setNick } = useContext(GameContext);
+
   const {
     register,
     handleSubmit,
@@ -16,6 +23,9 @@ const PlayerForm = () => {
 
   const onSubmit = (data: IPlayerForm) => {
     console.log(data);
+    setNick(data.nick);
+
+    navigate(routes.cloudGame);
   };
 
   return (
