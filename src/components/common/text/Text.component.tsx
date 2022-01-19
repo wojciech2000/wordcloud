@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React, { ReactNode } from "react";
 
-type Sizes = "12" | "16" | "20" | "24";
+type Sizes = "12" | "16";
 export type Colors = "black" | "white" | "error";
 
 interface ITitleProps {
@@ -18,8 +18,6 @@ const Text: React.FC<ITitleProps> = ({ size = "16", color = "black", className, 
         // FONT-SIZE
         "text-xs": size === "12",
         "text-base": size === "16",
-        "text-xl": size === "20",
-        "text-2xl md:text-3xl": size === "24",
 
         // COLOR
         "text-black": color === "black",

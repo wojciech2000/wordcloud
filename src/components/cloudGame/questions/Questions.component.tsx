@@ -4,8 +4,6 @@ import { GameContext } from "components/context/GameContext.context";
 import React, { useContext } from "react";
 
 interface IQuestionsProps {
-  allWords: string[];
-  goodWords: string[];
   checkAnswers: boolean;
 }
 
@@ -51,8 +49,8 @@ const Questions: React.FC<IQuestionsProps> = ({ checkAnswers }) => {
               className={clsx(
                 "py-1 px-2",
                 !checkAnswers && "transition-colors hover:bg-primary hover:text-white",
-                checkAnswers && isInSelectedWords && isInGoodWords && "text-white",
               )}
+              color={checkAnswers && isInSelectedWords && isInGoodWords ? "white" : "black"}
             >
               {word}
             </Text>

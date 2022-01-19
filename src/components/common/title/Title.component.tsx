@@ -1,12 +1,15 @@
 import clsx from "clsx";
 import React, { ReactNode } from "react";
 
-const sizes = ["16", "24", "30", "36", "48"] as const;
+const sizes = ["24", "30", "36"] as const;
 
 type Sizes = typeof sizes[number];
 
+type Colors = "black" | "primary";
+
 interface ITitleProps {
   size?: Sizes;
+  color?: Colors;
   className?: string;
   children: ReactNode;
 }
@@ -33,21 +36,22 @@ const setHeadingTag = (size: Sizes) => {
   return selectedSize?.headingNumber || MAX_HEADING_TAG_NUMBER;
 };
 
-const Title: React.FC<ITitleProps> = ({ size = "24", className, children }) => {
+const Title: React.FC<ITitleProps> = ({ size = "24", color = "black", className, children }) => {
   const Heading = `h${setHeadingTag(size)}` as keyof JSX.IntrinsicElements;
 
   return (
     <Heading
       className={clsx(
         "font-bold",
-
         {
           // FONT-SIZE
-          "text-base md:text-xl": size === "16",
           "text-2xl md:text-3xl": size === "24",
           "text-3xl md:text-4xl": size === "30",
-          "text-4xl md:text-6xl": size === "36",
-          "text-5xl md:text-7xl": size === "48",
+          "text-4xl md:text-5xl": size === "36",
+
+          //COLOR
+          "text-black": color === "black",
+          "text-primary": color === "primary",
         },
         className,
       )}

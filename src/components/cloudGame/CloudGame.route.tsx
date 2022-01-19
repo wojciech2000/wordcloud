@@ -7,19 +7,22 @@ import { routes } from "utilities/config/routes";
 import { questions } from "utilities/helpers/mockAPI.helper";
 import Questions from "./questions/Questions.component";
 
-const drawQuestionIndex = Math.floor(Math.random() * questions.length);
-const { question, all_words: allWords, good_words: goodWords } = questions[drawQuestionIndex];
-
 const CloudGame = () => {
   const navigate = useNavigate();
 
-  const { setAllWords, setGoodWords } = useContext(GameContext);
+  const { setAllWords, setGoodWords, setSelectedWords } = useContext(GameContext);
 
   const [checkAnswers, setCheckAnswers] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState("");
 
   useEffect(() => {
+    const drawQuestionIndex = Math.floor(Math.random() * questions.length);
+    const { question, all_words: allWords, good_words: goodWords } = questions[drawQuestionIndex];
+
     setAllWords(allWords);
     setGoodWords(goodWords);
+    setSelectedWords([]);
+    setCurrentQuestion(question);
   }, []);
 
   const handleButtonEvent = useCallback(() => {
@@ -33,10 +36,10 @@ const CloudGame = () => {
   return (
     <div className="w-full px-12 h-screen pt-20 flex justify-start items-center flex-col m-auto md:max-w-4xl md:pt-0 md:justify-center">
       <Title size="30" className="uppercase mb-4 text-center">
-        {question}
+        {currentQuestion}
       </Title>
 
-      <Questions allWords={allWords} goodWords={goodWords} checkAnswers={checkAnswers} />
+      <Questions checkAnswers={checkAnswers} />
 
       <Button onClick={handleButtonEvent} type="submit" className="mx-auto mt-4">
         {!checkAnswers ? "check answers" : "finish game"}
