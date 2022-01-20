@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React, { ReactNode } from "react";
 
 type Sizes = "12" | "16";
-export type Colors = "black" | "white" | "error";
+export type Colors = "black" | "white" | "primary" | "error";
 
 interface ITitleProps {
   size?: Sizes;

@@ -1,11 +1,10 @@
 import clsx from "clsx";
 import React, { ReactNode } from "react";
+import { Colors } from "../text/Text.component";
 
 const sizes = ["24", "30", "36"] as const;
 
 type Sizes = typeof sizes[number];
-
-type Colors = "black" | "primary";
 
 interface ITitleProps {
   size?: Sizes;
@@ -52,6 +51,7 @@ const Title: React.FC<ITitleProps> = ({ size = "24", color = "black", className,
           //COLOR
           "text-black": color === "black",
           "text-primary": color === "primary",
+          "text-error": color === "error",
         },
         className,
       )}

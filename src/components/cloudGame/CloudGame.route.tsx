@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { routes } from "utilities/config/routes";
 import { questions } from "utilities/helpers/mockAPI.helper";
 import Questions from "./questions/Questions.component";
+import Timer, { TIME } from "./timer/Timer.component";
 
 const CloudGame = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const CloudGame = () => {
 
   const [checkAnswers, setCheckAnswers] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState("");
+  const [time, setTime] = useState(TIME);
 
   useEffect(() => {
     const drawQuestionIndex = Math.floor(Math.random() * questions.length);
@@ -29,7 +31,7 @@ const CloudGame = () => {
     if (!checkAnswers) {
       setCheckAnswers(true);
     } else {
-      navigate(routes.summary);
+      navigate(routes.summary, { state: time });
     }
   }, [checkAnswers]);
 
@@ -38,6 +40,13 @@ const CloudGame = () => {
       <Title size="30" className="uppercase mb-4 text-center">
         {currentQuestion}
       </Title>
+
+      <Timer
+        time={time}
+        setTime={setTime}
+        checkAnswers={checkAnswers}
+        setCheckAnswers={setCheckAnswers}
+      />
 
       <Questions checkAnswers={checkAnswers} />
 

@@ -2,11 +2,12 @@ import Button from "components/common/button/Button.component";
 import Title from "components/common/title/Title.component";
 import { GameContext } from "components/context/GameContext.context";
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { routes } from "utilities/config/routes";
 
 const Summary = () => {
   const navigate = useNavigate();
+  const { state: time } = useLocation();
 
   const { nick, selectedWords, goodWords } = useContext(GameContext);
 
@@ -23,7 +24,10 @@ const Summary = () => {
       goodWord => !selectedWords.includes(goodWord),
     ).length;
 
-    const pointsAmount = correctSelectedWords * 2 - (wrongSelectedWords + unselectedCorrectWords);
+    const extraTime = (typeof time === "number" ? time : 0) / 2;
+
+    const pointsAmount =
+      correctSelectedWords * 2 - (wrongSelectedWords + unselectedCorrectWords) + extraTime;
 
     setCollectedPoints(pointsAmount);
   }, []);
